@@ -2,6 +2,8 @@ package br.com.kaikeventura.restmongodb.service.impl;
 
 import br.com.kaikeventura.restmongodb.dto.AddressDTO;
 import br.com.kaikeventura.restmongodb.dto.UserDTO;
+import br.com.kaikeventura.restmongodb.error.exception.DocumentNumberAlreadyRegisteredException;
+import br.com.kaikeventura.restmongodb.error.exception.UserNotFoundException;
 import br.com.kaikeventura.restmongodb.model.User;
 import br.com.kaikeventura.restmongodb.repository.UserRepository;
 import br.com.kaikeventura.restmongodb.service.UserService;
@@ -22,6 +24,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(UserDTO userDTO) {
+        verifyIfUserIsExists(userDTO.getDocumentNumber());
+
         return userRepository.save(userUtil.toUser(userDTO));
     }
 
@@ -42,6 +46,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User update(UserDTO userDTO, String documentNumber) {
+        if (!userDTO.getDocumentNumber().equals(documentNumber)) {
+            verifyIfUserIsExists(userDTO.getDocumentNumber());
+        }
         User user = getUser(documentNumber);
         BeanUtils.copyProperties(userDTO, user);
 
@@ -64,9 +71,15 @@ public class UserServiceImpl implements UserService {
     private User getUser(final String documentNumber) {
         final Optional<User> user = userRepository.findByDocumentNumber(documentNumber);
         if (user.isEmpty()) {
-            throw new RuntimeException();
+            throw new UserNotFoundException();
         }
 
         return user.get();
+    }
+
+    private void verifyIfUserIsExists(String documentNumber) {
+        userRepository.findByDocumentNumber(documentNumber).ifPresent(user -> {
+            throw new DocumentNumberAlreadyRegisteredException();
+        });
     }
 }
