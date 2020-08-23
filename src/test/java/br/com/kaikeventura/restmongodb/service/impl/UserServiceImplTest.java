@@ -25,6 +25,8 @@ import static org.mockito.Mockito.when;
 public class UserServiceImplTest {
 
     private UserServiceImpl userService;
+    private UserDTO userDTO;
+    private AddressDTO addressDTO;
 
     @Mock
     private UserRepository userRepository;
@@ -35,11 +37,7 @@ public class UserServiceImplTest {
     public void setUp() {
         userService = new UserServiceImpl(userRepository, userUtil);
         MockObjects.objects();
-    }
-
-    @Test
-    public void save() {
-        UserDTO userDTO = new UserDTO(
+        userDTO = new UserDTO(
                 "Maicon",
                 "Douglas",
                 25,
@@ -51,6 +49,16 @@ public class UserServiceImplTest {
                         "São Paulo"
                 )
         );
+        addressDTO = new AddressDTO(
+                "Rua Jujuba das Pegadas, 234",
+                "16900016",
+                "Suzano",
+                "São Paulo"
+        );
+    }
+
+    @Test
+    public void save() {
         User expectedUser = Fixture.from(User.class).gimme("uniqueUser");
         when(userRepository.save(userUtil.toUser(userDTO))).thenReturn(expectedUser);
 
@@ -91,18 +99,6 @@ public class UserServiceImplTest {
 
     @Test
     public void update() {
-        UserDTO userDTO = new UserDTO(
-                "Maicon",
-                "Douglas",
-                25,
-                "68010794090",
-                new AddressDTO(
-                        "Rua Jujuba das Pegadas, 234",
-                        "16900016",
-                        "Suzano",
-                        "São Paulo"
-                )
-        );
         User expectedUser = Fixture.from(User.class).gimme("uniqueUser");
         Optional<User> optionalExpectedUser = Optional.of(expectedUser);
         when(userRepository.findByDocumentNumber("68010794090")).thenReturn(optionalExpectedUser);
@@ -115,12 +111,6 @@ public class UserServiceImplTest {
 
     @Test
     public void updateAddress() {
-        AddressDTO addressDTO = new AddressDTO(
-                "Rua Jujuba das Pegadas, 234",
-                "16900016",
-                "Suzano",
-                "São Paulo"
-        );
         User expectedUser = Fixture.from(User.class).gimme("uniqueUser");
         Optional<User> optionalExpectedUser = Optional.of(expectedUser);
         when(userRepository.findByDocumentNumber("68010794090")).thenReturn(optionalExpectedUser);
@@ -141,18 +131,6 @@ public class UserServiceImplTest {
 
     @Test(expected = DocumentNumberAlreadyRegisteredException.class)
     public void documentNumberAlreadyRegisteredException() {
-        UserDTO userDTO = new UserDTO(
-                "Maicon",
-                "Douglas",
-                25,
-                "68010794090",
-                new AddressDTO(
-                        "Rua Jujuba das Pegadas, 234",
-                        "16900016",
-                        "Suzano",
-                        "São Paulo"
-                )
-        );
         User expectedUser = Fixture.from(User.class).gimme("uniqueUser");
         when(userRepository.findByDocumentNumber("68010794091")).thenReturn(Optional.of(expectedUser));
 
