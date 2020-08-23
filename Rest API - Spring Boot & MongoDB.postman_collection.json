@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "d17da33f-b5a1-41d4-9e5e-776f82d6e8e0",
+		"name": "Rest API - Spring Boot & MongoDB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Kaike\",\n    \"last_name\": \"Ventura\",\n    \"age\": 22,\n    \"document_number\": \"15564582599\",\n    \"address\": {\n        \"address\": \"Rua Jujuba das Pegadas, 234\",\n        \"postal_code\": \"15799872\",\n        \"city\": \"São Paulo\",\n        \"state\": \"São Paulo\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/users",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find All Users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Kaike\",\n    \"last_name\": \"Ventura\",\n    \"age\": 22,\n    \"document_number\": \"15564582595\",\n    \"address\": {\n        \"address\": \"Rua Jujuba das Pegadas, 234\",\n        \"postal_code\": \"15799872\",\n        \"city\": \"São Paulo\",\n        \"state\": \"São Paulo\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/users/all",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Users By Name",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Kaike\",\n    \"last_name\": \"Ventura\",\n    \"age\": 22,\n    \"document_number\": \"15564582595\",\n    \"address\": {\n        \"address\": \"Rua Jujuba das Pegadas, 234\",\n        \"postal_code\": \"15799872\",\n        \"city\": \"São Paulo\",\n        \"state\": \"São Paulo\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/users/name/Kaike",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"name",
+						"Kaike"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Users By Document Number",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Kaike\",\n    \"last_name\": \"Ventura\",\n    \"age\": 22,\n    \"document_number\": \"15564582595\",\n    \"address\": {\n        \"address\": \"Rua Jujuba das Pegadas, 234\",\n        \"postal_code\": \"15799872\",\n        \"city\": \"São Paulo\",\n        \"state\": \"São Paulo\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/users/document-number/15564582595",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"document-number",
+						"15564582595"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Amanda\",\n    \"last_name\": \"Nunes\",\n    \"age\": 22,\n    \"document_number\": \"15564582595\",\n    \"address\": {\n        \"address\": \"Rua Jujuba das Pegadas, 234\",\n        \"postal_code\": \"15799872\",\n        \"city\": \"São Paulo\",\n        \"state\": \"São Paulo\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/users/15564582595",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"15564582595"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User Address",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"address\": \"Rua Joel Gomes, 234\",\n    \"postal_code\": \"15799872\",\n    \"city\": \"Rio de Janeiro\",\n    \"state\": \"São Paulo\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/users/address/15564582595",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"address",
+						"15564582595"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/users/15564582595",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"15564582595"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
