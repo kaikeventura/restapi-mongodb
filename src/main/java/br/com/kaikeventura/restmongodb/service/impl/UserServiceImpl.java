@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User update(UserDTO userDTO, String documentNumber) {
         if (!userDTO.getDocumentNumber().equals(documentNumber)) {
-            verifyIfUserIsExists(userDTO.getDocumentNumber());
+            verifyIfUserIsExists(documentNumber);
         }
         User user = getUser(documentNumber);
         BeanUtils.copyProperties(userDTO, user);

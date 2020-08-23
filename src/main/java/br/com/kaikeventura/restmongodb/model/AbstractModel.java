@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public abstract class AbstractModel implements Serializable {
 
@@ -17,9 +18,9 @@ public abstract class AbstractModel implements Serializable {
 
     @CreatedDate
     @Field("created_date")
-    private LocalDateTime createdDate;
+    private Date createdDate;
 
     @LastModifiedDate
     @Field("last_modified_date")
-    private LocalDateTime lastModifiedDate;
+    private Date lastModifiedDate;
 }
